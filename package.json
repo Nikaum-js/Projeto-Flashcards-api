@@ -1,0 +1,23 @@
+{
+  "name": "flashcards-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mayckwazowski/flashcards-api.git"
+  },
+  "keywords": [],
+  "author": "Prof Mayck Cipriano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayckwazowski/flashcards-api/issues"
+  },
+  "homepage": "https://github.com/mayckwazowski/flashcards-api",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
