@@ -153,38 +153,42 @@ app.get( "/api/flashcards/:id", function( req, res){
 
 //POST /api/flashcards - Esse endpoint deverá criar um novo flashcard com os dados enviada pelo client, por meio do body.
 
-app.post( "/api/colecoes", function( req, res ){
-    //requisita os dados do body
-    const { descricao, publico } = req.body;
+    app.post('/api/flashcards', (req, res)=>{
+    //requisita os dados do flashcard do body
+    const {score, frente, verso}=req.body
     //busca na classe banco o metodo criarColeção e busca as variaveis descricao e publico
-    banco.criarColecao({ descricao, publico });
+    banco.criarFlashcard({ score, frente, verso });
 
     //printa na tela uma mensagem mostrando que uma coleção foi criada!
-    res.json( { "mensagem": "coleção Criada!" } );
+    res.json( { "mensagem": "novo flashcard criado com sucesso!!!" } );
     //busca os valores da descrição e publico e mostra na tela
-    res.json( { descricao, publico } );
+    res.json( { score, frente, verso } );
+
 } );
 
 //PUT /api/flashcards/:id - Esse endpoint deverá selecionar um flashcard, por meio do parâmetro id, e atualizar a mesma com os dados enviados pelo valores enviados por meio do body.
 
-app.put( "/api/colecoes/:id", function( req, res ){
+    app.put( '/api/flashcards/:id', ( req, res )=>{
     //requisita o Id 
     const { id } = req.params;
-    //busca as variaveis descricao e publico no body
-    const { descricao, publico } = req.body;
-    //busca na classe banco o metodo Id e declara que ele fara parte de colecao
-    const colecao = banco.selecionaColecao( id );
+    //busca as variaveis do body
+    const { score, frente, verso } = req.body;
+    //busca na classe banco o metodo Id e declara que ele fara parte de flashcard
+    const flashcard = banco.selecionaFlashCard( id );
 
     //troca o valor de descricao
-    colecao.descricao = descricao;
+    flashcard.descricao = descricao;
     //troca o valor de publico
-    colecao.publico = publico;
+    flashcard.publico = publico;
 
     //busca na classe banco o metodo salvar
-    banco.salvar( colecao );
+    banco.salvar( flashcard );
 
     //mostra na tela o valor de colecao
-    res.json( colecao );
+    res.json( flashcard );
+
+    res.json( { "mensagem": "flashcard salvo com sucesso!" } );
+    
 } );
 
 //DELETE /api/flashcards/:id - Esse endpoint deverá selecionar um flashcard, por meio do parâmetro id, e excluir o registro na base de dados.
@@ -193,12 +197,12 @@ app.delete( "/api/colecoes/:id", function( req, res ){
     //requesita o id como parametro
     const { id } = req.params;
     //busca na classe banco o metodo para selecionar a coleçao pelo id
-    const colecao = banco.selecionaColecao( id );
+    const flashcard = banco.selecionaFlashCard( id );
 
     //chama o metodo apagar da classe banco e coloca a colecao como parametro para ser apagado
-    banco.apagar(colecao);
+    banco.apagarFlashcard(flashcard);
     //printa na tela uma mensagem mostrando que a colecao foi apagada com sucesso
-    res.json( { "mensagem": "coleção apagada com sucesso!" } );
+    res.json( { "mensagem": "flashcard apagado com sucesso!" } );
 } );
 
 app.listen( process.env.PORT || 3000, function(){
