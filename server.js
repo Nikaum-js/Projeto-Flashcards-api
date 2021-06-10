@@ -176,10 +176,10 @@ app.get( "/api/flashcards/:id", function( req, res){
     //busca na classe banco o metodo Id e declara que ele fara parte de flashcard
     const flashcard = banco.selecionaFlashCard( id );
 
-    //troca o valor de descricao
-    flashcard.descricao = descricao;
-    //troca o valor de publico
-    flashcard.publico = publico;
+    // busca o valor da frente do flashcard 
+    dados.flashcard.frente = frente;
+    // busca o valor do verso do flashcard 
+    dados.flashcard.verso = verso;
 
     //busca na classe banco o metodo salvar
     banco.salvar( flashcard );
